@@ -18,11 +18,11 @@ const Login = () => {
         <h3 className="text-center">Login</h3>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
-            <label className="form-label">Email</label>
+            <label className="form-label">Username</label>
             <input
               type="text"
               className="form-control"
-              placeholder="Enter your email"
+              placeholder="Enter username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required

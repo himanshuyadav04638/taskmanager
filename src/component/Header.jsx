@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { AuthContext } from "../App";
 
 const Header = () => {
-  const {theme,setTheme,authDispatch} = useContext(AuthContext);
+  const {authState,theme,setTheme,authDispatch} = useContext(AuthContext);
 
   return (
     <nav className={`navbar px-3 shadow ${theme === "dark" ? "bg-dark navbar-dark" : "bg-light navbar-light"}`}>
@@ -16,7 +16,7 @@ const Header = () => {
         >
           Toggle Theme
         </button>
-        <button className="btn btn-danger" onClick={()=> authDispatch({ type: "LOGOUT" })}>Logout</button>
+        {authState.isAuthenticated && <button className="btn btn-danger" onClick={()=> authDispatch({ type: "LOGOUT" })}>Logout</button>}
       </div>
     </nav>
   );

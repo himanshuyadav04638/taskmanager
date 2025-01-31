@@ -7,15 +7,18 @@ import Cookies from "js-cookie";
 import { authReducer, taskReducer } from "./utils/reducer";
 import TaskList from "./component/TaskList";
 import { getApi } from "./utils/services";
+import useTheme from "./utils/useTheme";
 
 
 
 function App() {
   const [authState, authDispatch] = useReducer(authReducer, {isAuthenticated: !! Cookies.get("authToken")});
   const [taskState, taskDispatch] = useReducer(taskReducer, { tasks: [] });
-  const [theme, setTheme] = useState(Cookies.get("theme") || "light");
+
   const [filter, setFilter] = useState(Cookies.get("filter") || "all");
   const [sort, setSort] = useState(Cookies.get("sort") || "none");
+  const [theme, setTheme] = useTheme();
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,13 +35,8 @@ function App() {
   }, [authState.isAuthenticated]);
 
 
-
-  useEffect(() => {
-    Cookies.set("theme", theme, { expires: 7 });
-  }, [theme]);
-
   const handleLogin = (username, password) => {
-    if (username === "user" && password === "123") {
+    if (username === "user1" && password === "password123") {
       authDispatch({ type: "LOGIN" });
     } else {
       alert("Invalid credentials");
